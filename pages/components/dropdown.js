@@ -15,8 +15,6 @@ const Dropdown = () => {
 		fetchEns: true,
 	});
 
-	console.log(accountData);
-
 	const { connectors, connected } = data;
 
 	if (connected) {
