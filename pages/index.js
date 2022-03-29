@@ -1,6 +1,6 @@
 import Head from "next/head";
-import Dropdown from "./components/dropdown";
-import BalanceCheck from "./components/balanceCheck";
+import Dropdown from "../components/dropdown";
+import BalanceCheck from "../components/balanceCheck";
 
 const Home = () => {
 	return (
