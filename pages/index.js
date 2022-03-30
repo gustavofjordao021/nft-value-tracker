@@ -43,7 +43,7 @@ const Home = () => {
 							<span className="underline decoration-pink-500">bags!</span>
 						</p>
 						<div className="m-6 text-2xl flex flex-row items-center justify-center">
-							The best app to check how much are your{" "}
+							The best app to check how much your{" "}
 							<span className="px-2">
 								<Image src="/logo.png" width={24} height={24} />
 							</span>{" "}
