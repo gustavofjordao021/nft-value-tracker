@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { Menu, Transition } from "@headlessui/react";
-import { useConnect, useAccount } from "wagmi";
+import { useAccount, useConnect } from "wagmi";
 
 import shortenUserWalletAddress from "../utils/shortenUserWalletAddress";
 
@@ -9,7 +9,7 @@ function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
 }
 
-const Dropdown = () => {
+const DropdownConnect = () => {
 	const [{ data, error }, connect] = useConnect();
 	const [{ data: accountData }, disconnect] = useAccount({
 		fetchEns: true,
@@ -118,4 +118,4 @@ const Dropdown = () => {
 	);
 };
 
-export default Dropdown;
+export default DropdownConnect;
