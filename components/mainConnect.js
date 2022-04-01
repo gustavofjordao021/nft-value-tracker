@@ -20,7 +20,7 @@ const MainConnect = () => {
 	return (
 		<Menu as="div" className="relative inline-block text-left">
 			<div>
-				<Menu.Button className="inline-flex px-10 py-6 rounded-full text-white text-2xl drop-shadow-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
+				<Menu.Button className="inline-flex px-12 py-6 rounded-full text-white text-2xl drop-shadow-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
 					Connect Wallet
 				</Menu.Button>
 			</div>

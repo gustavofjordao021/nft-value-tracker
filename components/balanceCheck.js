@@ -12,10 +12,10 @@ const BalanceCheck = () => {
 	if (loading)
 		return (
 			<div className="flex flex-col items-center justify-center h-screen">
-				<div className="p-4 mx-2 w-1/6 flex flex-row items-center justify-center h-min rounded-full border-1 shadow-2xl">
+				<div className="p-4 mx-2 w-1/6 flex flex-row items-center justify-center h-20 rounded-full border-1 shadow-2xl">
 					<svg
 						role="status"
-						className="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-300 fill-pink-500"
+						className="mr-2 w-8 h-min text-gray-200 animate-spin dark:text-gray-300 fill-pink-500"
 						viewBox="0 0 100 101"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +36,7 @@ const BalanceCheck = () => {
 
 	return (
 		<div className="flex flex-col items-center justify-center h-screen">
-			<div className="p-4 mx-2 w-1/6 flex flex-row items-center justify-center h-min rounded-full border-1 shadow-2xl">
+			<div className="p-4 mx-2 w-1/6 flex flex-row items-center justify-center h-20 rounded-full border-1 shadow-2xl">
 				<svg
 					className="mx-2"
 					xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +68,7 @@ const BalanceCheck = () => {
 						fill="rgb(57,57,57)"
 					></path>
 				</svg>
-				{data?.formatted.substring(0, 4)}
+				<span className="text-xl">{data?.formatted.substring(0, 4)}</span>
 			</div>
 		</div>
 	);
