@@ -6,12 +6,12 @@ const BalanceCheck = () => {
 	});
 
 	const [{ data, error, loading }, getBalance] = useBalance({
-		addressOrName: accountData?.address,
+		addressOrName: accountData?.address || data,
 	});
 
 	if (loading)
 		return (
-			<div className="flex flex-col items-center justify-center h-screen">
+			<div className="flex flex-col items-center justify-center grow w-full">
 				<div className="p-4 mx-2 w-1/6 flex flex-row items-center justify-center h-20 rounded-full border-1 shadow-2xl">
 					<svg
 						role="status"
@@ -35,7 +35,7 @@ const BalanceCheck = () => {
 		);
 
 	return (
-		<div className="flex flex-col items-center justify-center h-screen">
+		<div className="flex flex-col items-center justify-center grow w-full">
 			<div className="p-4 mx-2 w-1/6 flex flex-row items-center justify-center h-20 rounded-full border-1 shadow-2xl">
 				<svg
 					className="mx-2"
