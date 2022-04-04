@@ -6,7 +6,7 @@ const BalanceCheck = () => {
 	});
 
 	const [{ data, error, loading }, getBalance] = useBalance({
-		addressOrName: accountData?.address || data,
+		addressOrName: accountData?.address,
 	});
 
 	if (loading)

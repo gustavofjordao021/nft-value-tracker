@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { useRouter } from "next/router";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { Menu, Transition } from "@headlessui/react";
 import { useAccount, useConnect } from "wagmi";
@@ -14,6 +15,14 @@ const DropdownConnect = () => {
 	const [{ data: accountData }, disconnect] = useAccount({
 		fetchEns: true,
 	});
+
+	const router = useRouter();
+
+	const connectAndRoute = async (x) => {
+		await connect(data.connectors[x]).then(() =>
+			router.push(`/${accountData?.ens?.name || accountData?.address}`)
+		);
+	};
 
 	const { connectors, connected } = data;
 
@@ -92,7 +101,7 @@ const DropdownConnect = () => {
 									active ? "text-gray-900" : "text-gray-700",
 									"block m-1 px-4 py-2 text-sm border-1 rounded-2xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
 								)}
-								onClick={() => connect(connectors[0])}
+								onClick={() => connectAndRoute(0)}
 							>
 								{connectors[0].name}
 							</button>
@@ -106,7 +115,7 @@ const DropdownConnect = () => {
 									active ? "text-gray-900" : "text-gray-700",
 									"block m-1 px-4 py-2 text-sm border-1 rounded-2xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
 								)}
-								onClick={() => connect(connectors[1])}
+								onClick={() => connectAndRoute(1)}
 							>
 								{connectors[1].name}
 							</button>

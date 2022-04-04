@@ -1,9 +1,7 @@
 import { Fragment } from "react";
-import { ChevronDownIcon } from "@heroicons/react/solid";
+import { useRouter } from "next/router";
 import { Menu, Transition } from "@headlessui/react";
 import { useAccount, useConnect } from "wagmi";
-
-import shortenUserWalletAddress from "../utils/shortenUserWalletAddress";
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
@@ -15,7 +13,13 @@ const MainConnect = () => {
 		fetchEns: true,
 	});
 
-	const { connectors, connected } = data;
+	const router = useRouter();
+
+	const connectAndRoute = async (x) => {
+		await connect(data.connectors[x]).then(() =>
+			router.push(`/${accountData?.ens?.name || accountData?.address}`)
+		);
+	};
 
 	return (
 		<Menu as="div" className="relative inline-block text-left">
@@ -42,9 +46,9 @@ const MainConnect = () => {
 									active ? "text-gray-900" : "text-gray-700",
 									"block m-1 px-4 py-2 text-sm w-full border-1 rounded-2xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
 								)}
-								onClick={() => connect(connectors[0])}
+								onClick={() => connectAndRoute(0)}
 							>
-								{connectors[0].name}
+								{data.connectors[0].name}
 							</button>
 						)}
 					</Menu.Item>
@@ -56,9 +60,9 @@ const MainConnect = () => {
 									active ? "text-gray-900" : "text-gray-700",
 									"block m-1 px-2 py-2 text-sm w-full border-1 rounded-2xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
 								)}
-								onClick={() => connect(connectors[1])}
+								onClick={() => connectAndRoute(1)}
 							>
-								{connectors[1].name}
+								{data.connectors[1].name}
 							</button>
 						)}
 					</Menu.Item>
