@@ -2,7 +2,7 @@ export default function collectionStats(req, res) {
 	res.status(200).json({
 		collections: [
 			{
-				collection: "Zipcy's SuperNormal",
+				name: "Zipcy's SuperNormal",
 				socials: [
 					{
 						openSea: "https://opensea.io/collection/supernormalbyzipcy",
@@ -16,7 +16,7 @@ export default function collectionStats(req, res) {
 				owners: 4535,
 			},
 			{
-				collection: "The Wanderers",
+				name: "The Wanderers",
 				socials: [
 					{
 						openSea: "https://opensea.io/collection/the-wanderers",

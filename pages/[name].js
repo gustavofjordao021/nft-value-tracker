@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Footer from "../components/footer";
 import Header from "../components/header";
 import BalanceCheck from "../components/balanceCheck";
+import CollectionTable from "../components/collectionTable";
 
 import { useAccount, useConnect } from "wagmi";
 
@@ -24,9 +25,10 @@ const Bags = () => {
 	}, []);
 
 	return (
-		<div className="p-6 flex flex-col min-h-screen w-screen items-stretch">
+		<div className="p-6 flex flex-col min-h-screen w-screen items-stretch justify-center">
 			<Header />
 			<BalanceCheck />
+			<CollectionTable />
 			<Footer />
 		</div>
 	);
