@@ -29,6 +29,20 @@ export default function collectionStats(req, res) {
 				supply: 8887,
 				owners: 4261,
 			},
+			{
+				name: "2112.run Genesis Cryptorunners",
+				socials: [
+					{
+						openSea: "https://opensea.io/collection/2112-cryptorunners",
+						discord: "https://discord.com/invite/2112run",
+						twitter: "https://twitter.com/2112Run",
+					},
+				],
+				floor: 0.04,
+				volume: 39,
+				supply: 2603,
+				owners: 1234,
+			},
 		],
 	});
 }
