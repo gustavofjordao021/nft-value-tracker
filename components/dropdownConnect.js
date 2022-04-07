@@ -60,7 +60,10 @@ const DropdownConnect = () => {
 										active ? "text-gray-900" : "text-gray-700",
 										"block m-1 px-4 py-2 text-sm border-1 rounded-2xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
 									)}
-									onClick={() => disconnect()}
+									onClick={() => {
+										disconnect();
+										router.push("/");
+									}}
 								>
 									Disconnect
 								</button>

@@ -3,16 +3,12 @@ import { useRouter } from "next/router";
 
 import Footer from "../components/footer";
 import Header from "../components/header";
-import BalanceCheck from "../components/balanceCheck";
-import CollectionTable from "../components/collectionTable";
+import BagsStats from "../components/bagsStats";
 
-import { useAccount, useConnect } from "wagmi";
+import { useConnect } from "wagmi";
 
 const Bags = () => {
 	const [{ data }, connect] = useConnect();
-	const [{ data: accountData }, disconnect] = useAccount({
-		fetchEns: true,
-	});
 
 	const router = useRouter();
 
@@ -27,8 +23,7 @@ const Bags = () => {
 	return (
 		<div className="p-6 flex flex-col min-h-screen w-screen justify-center">
 			<Header />
-			<BalanceCheck />
-			<CollectionTable />
+			<BagsStats />
 			<Footer />
 		</div>
 	);
