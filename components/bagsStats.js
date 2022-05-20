@@ -1,9 +1,14 @@
 import Image from "next/image";
 import useSWR from "swr";
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
 import { useAccount, useBalance } from "wagmi";
+
+const statsFetcher = (url, accountAddress) => {
+	fetch(`${url}?address=${accountAddress}`).then((res) => {
+		console.log(res);
+		res.json();
+	});
+};
 
 const BagsStats = () => {
 	const [{ data: accountData }, disconnect] = useAccount({
@@ -14,9 +19,12 @@ const BagsStats = () => {
 		addressOrName: accountData?.address,
 	});
 
-	const { data: collection, error } = useSWR("/api/stats", fetcher);
+	const { data: collection, error } = useSWR(
+		() => ["/api/stats/", accountData?.address],
+		statsFetcher
+	);
 
-	if (loading && collection)
+	if (loading)
 		return (
 			<>
 				<div className="flex flex-col items-center justify-center grow w-full">

@@ -30,7 +30,7 @@ const Home = () => {
 		<>
 			<div className="p-6 flex flex-col min-h-screen w-screen items-stretch justify-center grow">
 				<Head>
-					<title>bags.app - Best bag value tracker for the web3 world</title>
+					<title>tote.app - Best bag value tracker for the web3 world</title>
 					<link rel="shortcut icon" href="/favicon.ico" />
 					<meta
 						name="description"
@@ -47,6 +47,8 @@ const Home = () => {
 						<div className="m-6 text-2xl flex flex-row items-center justify-center">
 							The best app to check how much your{" "}
 							<span className="px-2">
+								<Image src="/logo.png" width={24} height={24} />
+								<Image src="/logo.png" width={24} height={24} />
 								<Image src="/logo.png" width={24} height={24} />
 							</span>{" "}
 							are worth

@@ -1,48 +1,39 @@
 export default function collectionStats(req, res) {
-	res.status(200).json({
-		collections: [
-			{
-				name: "Zipcy's SuperNormal",
-				socials: [
-					{
-						openSea: "https://opensea.io/collection/supernormalbyzipcy",
-						discord: "https://discord.com/invite/supernormal",
-						twitter: "https://twitter.com/zipcy8888",
-					},
-				],
-				floor: 0.39,
-				volume: 26029,
-				supply: 8888,
-				owners: 4535,
-			},
-			{
-				name: "The Wanderers",
-				socials: [
-					{
-						openSea: "https://opensea.io/collection/the-wanderers",
-						discord: "https://discord.com/invite/SMfCAXUdww",
-						twitter: "https://twitter.com/wanderers_nft",
-					},
-				],
-				floor: 0.12,
-				volume: 4469,
-				supply: 8887,
-				owners: 4261,
-			},
-			{
-				name: "2112.run Genesis Cryptorunners",
-				socials: [
-					{
-						openSea: "https://opensea.io/collection/2112-cryptorunners",
-						discord: "https://discord.com/invite/2112run",
-						twitter: "https://twitter.com/2112Run",
-					},
-				],
-				floor: 0.04,
-				volume: 39,
-				supply: 2603,
-				owners: 1234,
-			},
-		],
-	});
+	const options = { method: "GET", headers: { Accept: "application/json" } };
+
+	fetch(
+		`https://api.opensea.io/api/v1/collections?asset_owner=${req.query.address}&limit=2`
+	)
+		.then((response) => {
+			return response.json();
+		})
+		// .then((response) => {
+		// 	let userCollections = [];
+		// 	response.forEach((collection) => {
+		// 		const {
+		// 			name,
+		// 			image_url,
+		// 			stats,
+		// 			discord_url,
+		// 			external_url,
+		// 			twitter_username,
+		// 			owned_asset_count,
+		// 		} = collection;
+
+		// 		let collectionInfo = {
+		// 			name: name,
+		// 			image: image_url,
+		// 			price: Math.round(stats.floor_price * 100) / 100,
+		// 			socials: {
+		// 				discord: discord_url,
+		// 				website: external_url,
+		// 				twitter: twitter_username,
+		// 			},
+		// 			ownedAmount: owned_asset_count,
+		// 		};
+		// 		userCollections.push(collectionInfo);
+		// 	});
+		// 	return userCollections;
+		// })
+		.catch((err) => console.error(err));
 }

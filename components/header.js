@@ -15,7 +15,7 @@ const Header = () => {
 				<div className="flex flex-row items-center justify-center">
 					<Image src="/logo.png" width={24} height={24} />
 					<a className="ml-2 text-2xl font-bold underline decoration-pink-500 cursor-pointer">
-						bags.app
+						tote.app
 					</a>
 				</div>
 			</Link>
