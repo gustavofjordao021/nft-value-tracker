@@ -1,13 +1,21 @@
 import Image from "next/image";
 import useSWR from "swr";
+import { useEffect } from "react";
 
 import { useAccount, useBalance } from "wagmi";
 
-const statsFetcher = (url, accountAddress) => {
-	fetch(`${url}?address=${accountAddress}`).then((res) => {
-		console.log(res);
-		res.json();
-	});
+const collectionFetcher = (url1, url2, accountAddress) => {
+	if (accountAddress) {
+		fetch(`${url1}?address=${accountAddress}`)
+			.then((response) => response.json())
+			.then((data) => {
+				fetch(`${url2}`, {
+					method: "POST",
+					body: JSON.stringify(data),
+				});
+				// window.localStorage.setItem("collections", JSON.stringify(data));
+			});
+	}
 };
 
 const BagsStats = () => {
@@ -15,14 +23,20 @@ const BagsStats = () => {
 		fetchEns: true,
 	});
 
-	const [{ data, loading }, getBalance] = useBalance({
+	const [{ data: balanceData, loading }, getBalance] = useBalance({
 		addressOrName: accountData?.address,
 	});
 
-	const { data: collection, error } = useSWR(
-		() => ["/api/stats/", accountData?.address],
-		statsFetcher
+	const { data: collectionData, error } = useSWR(
+		() => ["/api/collections/", "/api/price/", accountData.address],
+		collectionFetcher
 	);
+
+	// useEffect(() => {
+	// 	if (typeof window !== "undefined") {
+	// 		localStorage.setItem(key, value);
+	// 	}
+	// });
 
 	if (loading)
 		return (
@@ -145,10 +159,12 @@ const BagsStats = () => {
 							fill="rgb(57,57,57)"
 						></path>
 					</svg>
-					<span className="text-2xl">{data?.formatted.substring(0, 4)}</span>
+					<span className="text-2xl">
+						{balanceData?.formatted.substring(0, 4)}
+					</span>
 				</div>
 			</div>
-			{collection ? (
+			{collectionData ? (
 				<>
 					<div className="flex flex-col items-center">
 						<table className="w-4/5 text-sm text-center text-black mb-48">
@@ -181,7 +197,7 @@ const BagsStats = () => {
 								</tr>
 							</thead>
 							<tbody className="shadow-2xl border-transparent">
-								{collection.collections?.map((collection) => (
+								{collections.map((collection) => (
 									<tr>
 										<th
 											scope="row"
