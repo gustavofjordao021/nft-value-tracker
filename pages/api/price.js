@@ -9,6 +9,7 @@ export default function collectionPrice(req, res) {
 
 	let userCollections = JSON.parse(req.body);
 
+	// Requests to the API are being throtthled to avoid overloading the API (2/sec for POST).
 	userCollections.forEach((collection) => {
 		fetch(
 			`https://api.opensea.io/api/v1/collection/${collection.name}/stats`,
