@@ -1,3 +1,4 @@
+import Script from "next/script";
 import { providers } from "ethers";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
@@ -52,14 +53,31 @@ const webSocketProvider = ({ chainId }) =>
 
 function MyApp({ Component, pageProps }) {
 	return (
-		<Provider
-			autoConnect
-			connectors={connectors}
-			provider={provider}
-			webSocketProvider={webSocketProvider}
-		>
-			<Component {...pageProps} />
-		</Provider>
+		<>
+			<Script
+				strategy="lazyOnload"
+				src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+			/>
+
+			<Script strategy="lazyOnload">
+				{`
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+                    page_path: window.location.pathname,
+                    });
+                `}
+			</Script>
+			<Provider
+				autoConnect
+				connectors={connectors}
+				provider={provider}
+				webSocketProvider={webSocketProvider}
+			>
+				<Component {...pageProps} />
+			</Provider>
+		</>
 	);
 }
 
