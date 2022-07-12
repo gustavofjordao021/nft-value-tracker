@@ -21,7 +21,7 @@ const Bags = () => {
 	}, []);
 
 	return (
-		<div className="p-6 flex flex-col min-h-screen w-screen justify-center">
+		<div className="p-6 flex flex-col min-h-screen w-screen justify-between">
 			<Header />
 			<BagsStats />
 			<Footer />

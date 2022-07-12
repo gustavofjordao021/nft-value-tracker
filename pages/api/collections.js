@@ -3,41 +3,36 @@ export default function collectionStats(req, res) {
 		method: "GET",
 		headers: {
 			Accept: "application/json",
-			"X-API-KEY": process.env.OPENSEA_APIKEY,
+			"x-api-key": process.env.RESERVOIR_APIKEY,
 		},
 	};
 
 	fetch(
-		`https://api.opensea.io/api/v1/collections?asset_owner=${req.query.address}&offset=0`,
+		`https://api.reservoir.tools/users/${req.query.address}/collections/v2?includeTopBid=false&offset=0&limit=100`,
 		options
 	)
 		.then((response) => response.json())
 		.then((accountResponse) => {
 			let userCollections = [];
-			accountResponse.forEach((collection) => {
-				const {
-					name,
-					slug,
-					image_url,
-					stats,
-					discord_url,
-					external_url,
-					twitter_username,
-					owned_asset_count,
-				} = collection;
+			accountResponse.collections.forEach((individualCollection) => {
+				const { collection, ownership } = individualCollection;
 
 				let collectionInfo = {
-					name: name,
-					slug: slug,
-					image: image_url,
-					price: Math.round(stats.floor_price * 100) / 100,
+					name: collection.name,
+					slug: collection.slug,
+					image: collection.image,
+					price: collection.floorAskPrice ? collection.floorAskPrice : 0,
+					supply: collection.tokenCount,
+					volume: collection.volume.allTime,
 					socials: {
-						discord: discord_url,
-						website: external_url,
-						twitter: twitter_username,
+						discord: collection.discord_url,
+						website: collection.external_url,
+						twitter: collection.twitterUsername,
 					},
-					ownedAmount: owned_asset_count,
+					ownedAmount: ownership.tokenCount,
+					networth: collection.floorAskPrice * ownership.tokenCount,
 				};
+
 				userCollections.push(collectionInfo);
 			});
 			res.status(200).json(userCollections);
