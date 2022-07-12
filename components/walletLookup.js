@@ -5,8 +5,6 @@ const WalletLookup = () => {
 		address: "",
 	});
 
-	console.log(data);
-
 	const onSubmit = async (event) => {
 		event.preventDefault();
 		const addressForLookup = event.target.elements.ENSName.value;

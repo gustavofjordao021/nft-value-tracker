@@ -12,12 +12,18 @@ const BagsStats = () => {
 				.then((response) => response.json())
 				.then((data) => {
 					window.localStorage.setItem("collections", JSON.stringify(data));
+					const response = JSON.parse(
+						window.localStorage.getItem("collections")
+					);
+					const parsedResponse = Object.keys(response);
 					setNetworthState({
 						isLoading: false,
 						collections: JSON.parse(window.localStorage.getItem("collections")),
 						networth: JSON.parse(
 							window.localStorage.getItem("collections")
-						).reduce((a, b) => a.networth + b.networth),
+						).reduce((a, b) => {
+							return a + b.networth;
+						}, 0),
 					});
 				});
 		}
