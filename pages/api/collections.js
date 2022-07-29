@@ -8,7 +8,7 @@ export default function collectionStats(req, res) {
 	};
 
 	fetch(
-		`https://api.reservoir.tools/users/${req.query.address}/collections/v2?includeTopBid=false&offset=0&limit=100`,
+		`https://api.reservoir.tools/users/${req.query.address}/collections/v2?includeTopBid=false&offset=0`,
 		options
 	)
 		.then((response) => response.json())
@@ -21,16 +21,20 @@ export default function collectionStats(req, res) {
 					name: collection.name,
 					slug: collection.slug,
 					image: collection.image,
-					price: collection.floorAskPrice ? collection.floorAskPrice : 0,
+					price: collection.floorAskPrice
+						? parseFloat(collection.floorAskPrice.toFixed(2))
+						: 0,
 					supply: collection.tokenCount,
-					volume: collection.volume.allTime,
+					volume: parseFloat(collection.volume.allTime.toFixed(0)),
 					socials: {
 						discord: collection.discord_url,
 						website: collection.external_url,
 						twitter: collection.twitterUsername,
 					},
 					ownedAmount: ownership.tokenCount,
-					networth: collection.floorAskPrice * ownership.tokenCount,
+					networth: parseFloat(
+						(collection.floorAskPrice * ownership.tokenCount).toFixed(2)
+					),
 				};
 
 				userCollections.push(collectionInfo);
