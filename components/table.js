@@ -30,6 +30,7 @@ const Table = ({ data, columns, isLoading }) => {
 
 	return (
 		<>
+			{console.log("Props => ", data)}
 			<table
 				{...getTableProps()}
 				className="w-4/5 text-sm text-center text-black table-auto"
