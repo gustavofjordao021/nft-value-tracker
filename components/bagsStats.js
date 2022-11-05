@@ -19,7 +19,7 @@ const BagsStats = () => {
 					const parsedResponse = Object.keys(response);
 					setNetworthState({
 						isLoading: false,
-						collections: JSON.parse(window.localStorage.getItem("collections")),
+						data: JSON.parse(window.localStorage.getItem("collections")),
 						networth: JSON.parse(
 							window.localStorage.getItem("collections")
 						).reduce((a, b) => {
@@ -40,7 +40,15 @@ const BagsStats = () => {
 
 	const [networthState, setNetworthState] = useState({
 		isLoading: true,
-		collections: "",
+		data: [
+			{
+				name: "",
+				price: "",
+				volume: "",
+				supply: "",
+				networth: "",
+			},
+		],
 		networth: 0,
 	});
 
@@ -51,195 +59,34 @@ const BagsStats = () => {
 
 	const columns = [
 		{
-			Header: "Name",
-			columns: [
-				{
-					Header: "First Name",
-					accessor: "firstName",
-				},
-				{
-					Header: "Last Name",
-					accessor: "lastName",
-				},
-			],
+			Header: "Collection",
+			accessor: "name",
 		},
 		{
-			Header: "Info",
-			columns: [
-				{
-					Header: "Age",
-					accessor: "age",
-				},
-				{
-					Header: "Visits",
-					accessor: "visits",
-				},
-				{
-					Header: "Status",
-					accessor: "status",
-				},
-				{
-					Header: "Profile Progress",
-					accessor: "progress",
-				},
-			],
+			Header: "Floor",
+			accessor: "price",
+		},
+		{
+			Header: "Volume",
+			accessor: "volume",
+		},
+		{
+			Header: "Supply",
+			accessor: "supply",
+		},
+		{
+			Header: "Bags",
+			accessor: "networth",
 		},
 	];
 
-	const data = [
-		{
-			firstName: "test",
-			lastName: "test2",
-			age: Math.floor(Math.random() * 30),
-			visits: Math.floor(Math.random() * 100),
-			progress: Math.floor(Math.random() * 100),
-			status: "test4",
-		},
-	];
-
-	// if (networthState.isLoading)
-	// 	return (
-	// 		<>
-	// 			<div className="flex flex-col items-center justify-center w-full">
-	// 				<h2 className="m-6 font-bold text-2xl bg-transparent flex items-center justify-center">
-	// 					<span className="mr-2">Mininum</span>{" "}
-	// 					<Image src="/logo.png" width={24} height={24} />{" "}
-	// 					<span className="ml-2">value </span>
-	// 				</h2>
-	// 				<div className="p-4 mx-2 w-1/6 h-24 flex flex-row justify-center items-center rounded-full border-1 shadow-2xl">
-	// 					<div className="w-12">
-	// 						<Spinner />
-	// 					</div>
-	// 					<span className="ml-6">Loading...</span>
-	// 				</div>
-	// 			</div>
-	// 			<div className="flex flex-col items-center mb-20 mt-20">
-	// 				<table className="w-4/5 text-sm text-center text-black table-auto">
-	// 					<thead className="text-xs text-white uppercase shadow-2xl border-transparent">
-	// 						<tr className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 border-transparent">
-	// 							<th
-	// 								scope="col"
-	// 								className="px-6 py-3 border-transparent rounded-tl-xl mb-8"
-	// 							>
-	// 								Collection
-	// 							</th>
-	// 							<th scope="col" className="px-6 py-3 border-transparent">
-	// 								Floor
-	// 							</th>
-	// 							<th scope="col" className="px-6 py-3 border-transparent">
-	// 								Volume
-	// 							</th>
-	// 							<th scope="col" className="px-6 py-3 border-transparent">
-	// 								Supply
-	// 							</th>
-	// 							<th scope="col" className="px-6 py-3 border-transparent">
-	// 								Owners
-	// 							</th>
-	// 							<th
-	// 								scope="col"
-	// 								className="px-6 py-3 border-transparent rounded-tr-xl"
-	// 							>
-	// 								Bags
-	// 							</th>
-	// 						</tr>
-	// 					</thead>
-	// 					<tbody className="shadow-2xl border-transparent">
-	// 						<tr className="w-full">
-	// 							<td colSpan={6}>
-	// 								<div className="h-48 p-8 flex justify-center">
-	// 									<Spinner />
-	// 								</div>
-	// 							</td>
-	// 						</tr>
-	// 					</tbody>
-	// 				</table>
-	// 			</div>
-	// 		</>
-	// 	);
-
-	// return (
-	// 	<>
-	// 		<div className="flex flex-col items-center justify-center grow w-full">
-	// 			<h2 className="m-6 font-bold text-2xl bg-transparent flex items-center justify-center">
-	// 				<span className="mr-2">Mininum</span>{" "}
-	// 				<Image src="/logo.png" width={24} height={24} />{" "}
-	// 				<span className="ml-2">value </span>
-	// 			</h2>
-	// 			<div className="p-4 mx-2 w-1/6 flex flex-row items-center justify-center h-20 rounded-full border-1 shadow-2xl">
-	// 				<Image src="/eth.png" width={12} height={20} />{" "}
-	// 				<span className="text-2xl ml-4">
-	// 					{parseFloat(networthState.networth.toFixed(2))}
-	// 				</span>
-	// 			</div>
-	// 		</div>
-	// 		{networthState ? (
-	// 			<>
-	// 				<div className="flex flex-col items-center">
-	// 					<table className="w-4/5 text-sm text-center text-black table-auto mb-20 mt-20">
-	// 						<thead className="text-xs text-white uppercase shadow-2xl border-transparent">
-	// 							<tr className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 border-transparent">
-	// 								<th
-	// 									scope="col"
-	// 									className="px-6 py-3 border-transparent rounded-tl-xl mb-8"
-	// 								>
-	// 									Collection
-	// 								</th>
-	// 								<th scope="col" className="px-6 py-3 border-transparent">
-	// 									Floor
-	// 								</th>
-	// 								<th scope="col" className="px-6 py-3 border-transparent">
-	// 									Volume
-	// 								</th>
-	// 								<th scope="col" className="px-6 py-3 border-transparent">
-	// 									Supply
-	// 								</th>
-	// 								<th
-	// 									scope="col"
-	// 									className="px-6 py-3 border-transparent rounded-tr-xl"
-	// 								>
-	// 									Bags
-	// 								</th>
-	// 							</tr>
-	// 						</thead>
-	// 						<tbody className="shadow-2xl border-transparent">
-	// 							{networthState.collections.map((collection) => (
-	// 								<tr>
-	// 									<th
-	// 										scope="row"
-	// 										className="px-6 py-4 font-medium text-black whitespace-nowrap"
-	// 									>
-	// 										{collection.name}
-	// 									</th>
-	// 									<td className="px-6 py-4 border-transparent">
-	// 										<Image src="/eth.png" width={12} height={20} />{" "}
-	// 										{collection.price}
-	// 									</td>
-	// 									<td className="px-6 py-4 border-transparent">
-	// 										<Image src="/eth.png" width={12} height={20} />{" "}
-	// 										{collection.volume}
-	// 									</td>
-	// 									<td className="px-6 py-4 border-transparent">
-	// 										{collection.supply}
-	// 									</td>
-	// 									<td className="px-6 py-4 border-transparent">
-	// 										<Image src="/eth.png" width={12} height={20} />{" "}
-	// 										{collection.price * collection.ownedAmount}
-	// 									</td>
-	// 								</tr>
-	// 							))}
-	// 						</tbody>
-	// 					</table>
-	// 				</div>
-	// 			</>
-	// 		) : (
-	// 			<>
-	// 				<div>blob</div>
-	// 			</>
-	// 		)}
-	// 	</>
-	// );
-
-	return <Table columns={columns} data={data} />;
+	return (
+		<Table
+			columns={columns}
+			data={networthState.data}
+			isLoading={networthState.isLoading}
+		/>
+	);
 };
 
 export default BagsStats;
