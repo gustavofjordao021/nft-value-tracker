@@ -6,6 +6,7 @@ import { useAccount, useBalance } from "wagmi";
 import Footer from "../components/footer";
 import Header from "../components/header";
 import BagsStats from "../components/bagsStats";
+import MinimumWalletValue from "../components/minValue";
 
 import { useConnect } from "wagmi";
 
@@ -43,7 +44,6 @@ const Bags = () => {
 					const response = JSON.parse(
 						window.localStorage.getItem("collections")
 					);
-					const parsedResponse = Object.keys(response);
 					setNetworthState({
 						isLoading: false,
 						data: JSON.parse(window.localStorage.getItem("collections")),
@@ -73,8 +73,9 @@ const Bags = () => {
 	}, [networthState]);
 
 	return (
-		<div className="p-6 flex flex-col min-h-screen w-screen justify-between">
+		<div className="p-6 flex flex-col h-screen w-screen justify-between">
 			<Header />
+			<MinimumWalletValue walletData={networthState} />
 			<BagsStats walletData={networthState} />
 			<Footer />
 		</div>

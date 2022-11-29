@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Footer = () => {
 	return (
-		<footer className="flex items-center justify-center w-full">
+		<footer className="py-6 flex items-center justify-center w-full">
 			<p>
 				Made with <span className="pr-1">💜</span> by{" "}
 				<Link href="https://twitter.com/gjordaodoteth">

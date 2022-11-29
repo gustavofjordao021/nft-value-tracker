@@ -1,5 +1,4 @@
 import Table from "./table";
-import MinimumWalletValue from "./minValue";
 
 const BagsStats = ({ walletData }) => {
 	const columns = [
@@ -27,8 +26,7 @@ const BagsStats = ({ walletData }) => {
 
 	return (
 		<>
-			<div className="p-6 flex flex-col min-h-screen w-full justify-between items-center">
-				<MinimumWalletValue data={walletData} />
+			<div className="p-12 flex flex-col h-full w-full justify-center items-center">
 				<Table
 					columns={columns}
 					data={walletData.data}
