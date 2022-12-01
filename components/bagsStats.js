@@ -19,7 +19,7 @@ const BagsStats = ({ walletData }) => {
 			accessor: "supply",
 		},
 		{
-			Header: "Bags",
+			Header: "Net worth",
 			accessor: "networth",
 		},
 	];

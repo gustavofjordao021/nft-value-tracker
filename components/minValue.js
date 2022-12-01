@@ -7,7 +7,7 @@ const MinimumWalletValue = ({ walletData }) => {
 			<>
 				<div className="p-8 flex flex-col items-center justify-center w-full">
 					<h2 className="m-6 font-bold text-2xl bg-transparent flex items-center justify-center">
-						<span className="mr-2">Mininum</span>{" "}
+						<span className="mr-2">Minimum</span>{" "}
 						<Image src="/logo.png" width={24} height={24} />{" "}
 						<span className="ml-2">value </span>
 					</h2>
@@ -25,7 +25,7 @@ const MinimumWalletValue = ({ walletData }) => {
 			<>
 				<div className="p-8 flex flex-col items-center justify-center grow w-full">
 					<h2 className="m-6 font-bold text-2xl bg-transparent flex items-center justify-center">
-						<span className="mr-2">Mininum</span>{" "}
+						<span className="mr-2">Minimum</span>{" "}
 						<Image src="/logo.png" width={24} height={24} />{" "}
 						<span className="ml-2">value </span>
 					</h2>
