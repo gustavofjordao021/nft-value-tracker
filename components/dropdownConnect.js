@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { useRouter } from "next/router";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { Menu, Transition } from "@headlessui/react";
-import { useAccount, useConnect } from "wagmi";
+import { useAccount, useConnect, useDisconnect, useEnsName } from "wagmi";
 
 import shortenUserWalletAddress from "../utils/shortenUserWalletAddress";
 
@@ -11,31 +11,29 @@ function classNames(...classes) {
 }
 
 const DropdownConnect = () => {
-	const [{ data, error }, connect] = useConnect();
-	const [{ data: accountData }, disconnect] = useAccount({
-		fetchEns: true,
-	});
+	const { disconnect } = useDisconnect();
+	const { connect, connectors } = useConnect();
+	const { address, isConnected } = useAccount();
+
+	const { data: ensName, isLoading } = useEnsName({ address: address });
 
 	const router = useRouter();
 
 	const connectAndRoute = async (x) => {
 		await connect(data.connectors[x]).then(() =>
-			router.push(`/${accountData?.ens?.name || accountData?.address}`)
+			router.push(`/${ensName?.data || address}`)
 		);
 	};
 
-	const { connectors, connected } = data;
-
-	if (connected) {
+	if (isConnected) {
 		return (
 			<Menu as="div" className="relative inline-block text-left">
+				{console.log(ensName)}
 				<div>
 					<Menu.Button className="inline-flex p-4 mx-2 rounded-full text-white drop-shadow-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
-						{accountData.ens
-							? `${accountData?.ens?.name} (${shortenUserWalletAddress(
-									accountData?.address
-							  )})`
-							: shortenUserWalletAddress(accountData?.address)}
+						{isLoading
+							? shortenUserWalletAddress(address)
+							: `${ensName} (${shortenUserWalletAddress(address)})`}
 						<ChevronDownIcon
 							className="-mr-1 ml-2 mt-0.5 h-5 w-5"
 							aria-hidden="true"

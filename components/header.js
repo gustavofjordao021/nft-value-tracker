@@ -1,14 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { useConnect } from "wagmi";
+import { useConnect, useAccount } from "wagmi";
 
 import DropdownConnect from "../components/dropdownConnect";
 
 const Header = () => {
-	const [{ data, error }, connect] = useConnect();
+	const { connect, connectors, error, isLoading, pendingConnector } =
+		useConnect();
 
-	const { connected } = data;
+	const { address, connector, isConnected } = useAccount();
+
 	return (
 		<div className="flex justify-between">
 			<Link href="/">
@@ -19,7 +21,7 @@ const Header = () => {
 					</a>
 				</div>
 			</Link>
-			{connected ? (
+			{isConnected ? (
 				<DropdownConnect />
 			) : (
 				<>

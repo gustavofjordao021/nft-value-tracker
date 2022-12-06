@@ -1,24 +1,18 @@
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useAccount, useBalance } from "wagmi";
+import { useAccount, useBalance, useEnsAddress } from "wagmi";
 
 import Footer from "../components/footer";
 import Header from "../components/header";
 import BagsStats from "../components/bagsStats";
 import MinimumWalletValue from "../components/minValue";
 
-import { useConnect } from "wagmi";
-
 const Bags = () => {
-	const [{ data }, connect] = useConnect();
-
-	const [{ data: accountData }, disconnect] = useAccount({
-		fetchEns: true,
-	});
-
-	const [{ data: balanceData, loading }, getBalance] = useBalance({
-		addressOrName: accountData?.address,
+	const { address, isConnected } = useAccount();
+	const { data: ensName } = useEnsAddress({ address: address });
+	const { data, isError } = useBalance({
+		address: address,
 	});
 
 	const [networthState, setNetworthState] = useState({
@@ -58,16 +52,14 @@ const Bags = () => {
 	};
 
 	const { data: collectionData, error } = useSWR(
-		() => ["/api/collections/", accountData.address],
+		() => ["/api/collections/", address],
 		collectionFetcher
 	);
-
-	const { connected } = data;
 
 	const router = useRouter();
 
 	useEffect(() => {
-		if (!connected) {
+		if (!isConnected) {
 			router.push("/");
 		}
 	}, [networthState]);

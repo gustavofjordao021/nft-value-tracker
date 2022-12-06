@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { useAccount, useConnect } from "wagmi";
+import { useAccount } from "wagmi";
 
 import Footer from "../components/footer";
 import Header from "../components/header";
@@ -11,20 +11,15 @@ import MainConnect from "../components/mainConnect";
 import WalletLookup from "../components/walletLookup";
 
 const Home = () => {
-	const [{ data, error }, connect] = useConnect();
-	const [{ data: accountData }, disconnect] = useAccount({
-		fetchEns: true,
-	});
+	const { address, isConnected } = useAccount();
 
 	const router = useRouter();
 
-	const { connected } = data;
-
 	useEffect(() => {
-		if (connected) {
-			router.push(`/${accountData?.ens?.name || accountData?.address}`);
+		if (isConnected) {
+			router.push(`/${address || address}`);
 		}
-	}, [connected]);
+	}, [isConnected]);
 
 	return (
 		<>

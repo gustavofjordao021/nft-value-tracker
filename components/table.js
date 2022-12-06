@@ -29,7 +29,6 @@ const Table = ({ data, columns, isLoading }) => {
 
 	return (
 		<>
-			{console.log("Props => ", data)}
 			<table
 				{...getTableProps()}
 				className="w-4/5 text-sm text-center text-black table-auto"
@@ -77,14 +76,30 @@ const Table = ({ data, columns, isLoading }) => {
 								return (
 									<tr {...row.getRowProps()}>
 										{row.cells.map((cell) => {
-											return (
-												<td
-													{...cell.getCellProps()}
-													className="px-6 py-4 border-transparent"
-												>
-													{cell.render("Cell")}
-												</td>
-											);
+											if (
+												cell.column.Header == "Volume" ||
+												cell.column.Header == "Net worth" ||
+												cell.column.Header == "Floor"
+											) {
+												return (
+													<td
+														{...cell.getCellProps()}
+														className="px-6 py-4 border-transparent"
+													>
+														<Image src="/eth.png" width={12} height={20} />{" "}
+														{cell.render("Cell")}
+													</td>
+												);
+											} else {
+												return (
+													<td
+														{...cell.getCellProps()}
+														className="px-6 py-4 border-transparent"
+													>
+														{cell.render("Cell")}
+													</td>
+												);
+											}
 										})}
 									</tr>
 								);
