@@ -1,24 +1,15 @@
 import { Fragment } from "react";
 import { useRouter } from "next/router";
 import { Menu, Transition } from "@headlessui/react";
-import { useAccount, useConnect } from "wagmi";
+import { useConnect } from "wagmi";
 
-function classNames(...classes) {
-	return classes.filter(Boolean).join(" ");
-}
+import classNames from "../utils/classNamesJoin";
 
 const MainConnect = () => {
-	const { address, connector, isConnected } = useAccount();
 	const { connect, connectors, error, isLoading, pendingConnector } =
 		useConnect();
 
 	const router = useRouter();
-
-	const connectAndRoute = async (x) => {
-		await connect(data.connectors[x]).then(() =>
-			router.push(`/${accountData?.ens?.name || accountData?.address}`)
-		);
-	};
 
 	return (
 		<Menu as="div" className="relative inline-block text-left">

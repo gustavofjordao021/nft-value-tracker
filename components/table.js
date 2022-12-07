@@ -86,8 +86,12 @@ const Table = ({ data, columns, isLoading }) => {
 														{...cell.getCellProps()}
 														className="px-6 py-4 border-transparent"
 													>
-														<Image src="/eth.png" width={12} height={20} />{" "}
-														{cell.render("Cell")}
+														<div className="flex flex-row items-center justify-center">
+															<Image src="/eth.png" width={12} height={20} />{" "}
+															<span className="ml-4">
+																{cell.render("Cell")}
+															</span>
+														</div>
 													</td>
 												);
 											} else {

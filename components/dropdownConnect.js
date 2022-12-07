@@ -4,11 +4,8 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 import { Menu, Transition } from "@headlessui/react";
 import { useAccount, useConnect, useDisconnect, useEnsName } from "wagmi";
 
+import classNames from "../utils/classNamesJoin";
 import shortenUserWalletAddress from "../utils/shortenUserWalletAddress";
-
-function classNames(...classes) {
-	return classes.filter(Boolean).join(" ");
-}
 
 const DropdownConnect = () => {
 	const { disconnect } = useDisconnect();
