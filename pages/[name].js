@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import { useRouter } from "next/router";
+import { useAccount } from "wagmi";
 import { useEffect, useState } from "react";
-import { useAccount, useBalance, useEnsAddress } from "wagmi";
 
 import Footer from "../components/footer";
 import Header from "../components/header";
@@ -10,10 +10,6 @@ import MinimumWalletValue from "../components/minValue";
 
 const Bags = () => {
 	const { address, isConnected } = useAccount();
-	const { data: ensName } = useEnsAddress({ address: address });
-	const { data, isError } = useBalance({
-		address: address,
-	});
 
 	const [networthState, setNetworthState] = useState({
 		isLoading: true,

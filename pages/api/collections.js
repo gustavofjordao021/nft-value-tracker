@@ -37,8 +37,9 @@ export default function collectionStats(req, res) {
 							(collection.floorAskPrice * ownership.tokenCount).toFixed(3)
 						),
 					};
-
-					userCollections.push(collectionInfo);
+					if (collectionInfo.networth > 0) {
+						userCollections.push(collectionInfo);
+					}
 				});
 				userCollections.sort((a, b) => b.networth - a.networth);
 				return res.status(200).json(userCollections);

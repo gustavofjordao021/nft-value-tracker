@@ -8,10 +8,10 @@ ToteApp aims to help NFT holders to understand their net worth by checking the f
 
 ToteApp is built on:
 
-- Next.js (my first one!)
-- `wagmi`
-- [Reservoir APIs](https://docs.reservoir.tools/reference/overview)
+- [`Next.js`](https://nextjs.org/)
+- [`wagmi.sh`](https://wagmi.sh/)
+- [`Reservoir APIs`](https://docs.reservoir.tools/reference/overview)
 
 ## Credits
 
-ToteApp is inspired by [value.app](https://value.app/), and I largely thank them for that. If you wish to provide feedback, send me a DM over the bird app at [@gjordaodoteth](https://twitter.com/gjordaodoteth).
+ToteApp is inspired by [value.app](https://value.app/), and I largely thank them for that. If you wish to provide feedback, send me a DM over the bird app at [@gjordaodoteth](https://twitter.com/gjordaodoteth) or drop some ETH over gjordao.eth.

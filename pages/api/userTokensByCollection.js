@@ -13,7 +13,7 @@ export default function userTokensByCollection(req, res) {
 	)
 		.then((response) => response.json())
 		.then((accountResponse) => {
-			res.status(200).json(userCollections);
+			res.status(200).json(accountResponse);
 		})
 		.catch((error) => console.error(error));
 }
